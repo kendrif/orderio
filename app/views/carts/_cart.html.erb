@@ -1,0 +1,26 @@
+<section class="bg-white border-t-2 border-gray-200 rounded-t-lg ">
+<article>
+  <% if notice %>
+    <aside id="notice"><%= notice %></aside>
+  <% end %>
+  
+  <h2 class="text-black font-bold p-8">My Order</h2>
+  <div class="overflow-auto h-64 shadow">
+  <table class="">
+    <%= render(cart.line_items) %>
+  </table>
+  
+  </div>
+    <div class="">
+
+     <button class="w-full "> 
+       <%= link_to "Confirm Order | £#{cart.total_price}", new_order_path(amount: cart.total_price, account_id: @account.id), method: :get, class: "bg-indigo-700 items-center text-indigo-100 leading-none lg:rounded-full flex lg:inline-flex h-10" %>
+      </button>
+      </div>
+    </div>
+  </div>
+
+</article>
+
+</section>
+
