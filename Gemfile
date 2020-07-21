@@ -1,4 +1,4 @@
-source 'https://rubygems.org'
+source 'http://rubygems.org'
 git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 
 ruby '2.7.0'
@@ -59,3 +59,8 @@ gem 'sidekiq', '~> 5.2', '>= 5.2.7'
 gem 'stripe', '~> 5.22'
 gem 'omniauth', '~> 1.9'
 gem 'omniauth-stripe-connect'
+
+gem 'capistrano', '~> 3.11'
+gem 'capistrano-rails', '~> 1.4'
+gem 'capistrano-passenger', '~> 0.2.0'
+gem 'capistrano-rbenv', '~> 2.1', '>= 2.1.4'
