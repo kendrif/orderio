@@ -23,7 +23,7 @@ default: &default
 
 development:
   <<: *default
-  database: final_development
+  database: orderio_development
 
   # The specified database role being used to connect to postgres.
   # To create additional roles in postgres see `$ createuser --help`.
@@ -80,6 +80,6 @@ test:
 #
 production:
   <<: *default
-  database: database_production
-  username: back_my_idea
+  database: orderio_production
+  username: orderio
   password: <%= ENV['BACK_MY_IDEA_DATABASE_PASSWORD'] %>

@@ -187,6 +187,4 @@ ActiveRecord::Schema.define(version: 2020_07_19_132756) do
   add_foreign_key "perks", "projects"
   add_foreign_key "products", "users"
   add_foreign_key "projects", "users"
-
-  
 end
