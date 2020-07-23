@@ -15,14 +15,13 @@
 
  <body class="text-black bg-gray-100">
 
-
     <header class="mb-2">
       <% if admin? %> 
       <nav class="flex flex-wrap items-center justify-between px-3 py-2 text-gray-700 lg:px-10">
         <div class="flex items-center mr-6 flex-no-shrink">
 
           <% if admin? %> 
-              <%= link_to "ORDERIO", admin_index_path, class:"link text-lg tracking-wider font-semibold text-black hover:text-gray-700 uppercase hidden md:block" %>
+              <%= link_to "ORDERIO", root_path, class:"link text-lg tracking-wider font-semibold text-black hover:text-gray-700 uppercase hidden md:block" %>
            <% else %>
               <h2 class= "text-lg tracking-wider font-semibold text-black uppercase hidden md:block "> "ORDERIO" </h2>
           <% end %>
