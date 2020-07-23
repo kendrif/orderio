@@ -186,6 +186,18 @@
       <%= f.label :email, class:"font-bold text-theme-color text-md" %>
       <%= f.email_field :email, autocomplete: "email", class:"shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 mt-1 leading-tight focus:outline-none focus:shadow-outline" %>
     </div>
+    
+
+    <div class="mb-6">
+      <%= f.label :Contact_Number, class:"font-bold text-theme-color text-md" %>
+      <%= f.text_field :contactnum, autocomplete: "contactnum", class:"shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 mt-1 leading-tight focus:outline-none focus:shadow-outline" %>
+    </div>
+
+    <div class="mb-6">
+      <%= f.label :address, class:"font-bold text-theme-color text-md" %>
+      <%= f.text_area :address, autocomplete: "address", class:"shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 mt-1 leading-tight focus:outline-none focus:shadow-outline" %>
+    </div>
+
 
     <div class="mb-6">
       <% if devise_mapping.confirmable? && resource.pending_reconfirmation? %>
