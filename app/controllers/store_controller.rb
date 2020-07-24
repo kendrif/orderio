@@ -8,6 +8,13 @@ class StoreController < ApplicationController
     @products = Product.order(:title)
   end
 
+  def menu
+    @products = Product.order(:title)
+    @categories = Category.order(:category)
+    @account = User.find_by_id(params[:id])
+    render layout: false
+  end
+
   def profile
     @products = Product.order(:title)
     @categories = Category.order(:category)

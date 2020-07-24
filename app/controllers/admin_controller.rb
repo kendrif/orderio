@@ -10,6 +10,9 @@ class AdminController < ApplicationController
     @orders = Order.order(:created_at)
   end
 
+  def sales
+  end
+
   def order
     @total_orders = Order.count
     @orders = Order.where(complete: 'f', OrderFini: 't', Storeid: current_user.id).order(:created_at)

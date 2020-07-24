@@ -1,0 +1,122 @@
+<h1></h1>
+<% if notice %>
+  <div class="alert alert-success" role="alert"><%= notice %></div>
+<% end %>
+
+<html>
+  <head>
+    <title><%= @account.s_name %> | Digital Menu</title>
+    <%= csrf_meta_tags %>
+    <%= csp_meta_tag %>
+
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <%= stylesheet_link_tag  'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+    <%= stylesheet_pack_tag  'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+    <%= javascript_include_tag 'https://js.stripe.com/v3/' %>
+    <%= javascript_pack_tag  'application', 'data-turbolinks-track': 'reload' %>
+  </head>
+
+<style>
+div.scrollmenu {
+  overflow: auto;
+  white-space: nowrap;
+}
+
+div.scrollmenu a {
+  display: inline-block;
+  text-align: center;
+  padding: 14px;
+  text-decoration: none;
+}
+
+</style>
+
+ <body class="text-black bg-gray-100">
+
+  <% flash.each do |type, message| %>
+    <% if type == "alert" %>
+      <div class="bg-red-500">
+        <div class="container px-2 py-4 mx-auto font-sans font-medium text-center text-white"><%= message %></div>
+      </div>
+    <% end %>
+    <% if type == "notice" %>
+      <div class="bg-green-500">
+        <div class="container px-2 py-4 mx-auto font-sans font-medium text-center text-white"><%= message %></div>
+      </div>
+    <% end %>
+  <% end %>
+
+ <div class="bg-white w-full shadow-lg z-10 pb-4">
+  <h1 class="mb-0 text-2xl text-black font-light text-center pt-4">  <%= @account.s_name %> </h1> 
+</div>
+</div>
+<div class="scrollmenu sticky shadow bg-white top-0 z-10 p-4">
+<% cache @categories do %>
+    <% @categories.where(user_id: @account.id).each do |category| %>
+      <% cache category do %>
+
+  		<a href="#<%= category.category%>" class="bg-transparent hover:bg-blue text-gray-400 font-semibold hover:text-black py-2 px-4 border hover:border-transparent rounded mr-2"> <%= category.category %> </a>
+  
+                  <% end %>
+              <% end %>
+            <% end %>
+</div>
+
+
+<div class="pt-40">
+<% cache @categories do %>
+    <% @categories.where(user_id: @account.id).each do |category| %>
+      <% cache category do %>
+        <div class="relative w-full p-3 mb-1 rounded-lg bg-blue lg:w-1/4 lg:mr-8">
+            <h3 class="mb-2 text-3xl text-gray-700 font-black" id="<%= category.category %>"><%= category.category %></h3>
+        </div>
+
+        <div>
+            <% cache @products do %>
+              <% @products.where(user_id: @account.id, category: category, available: 't').each do |product| %>
+                <% cache product do %>
+                   <ul class="flex flex-col p-2">
+                    <li class="border-gray-400 flex flex-row mb-2">
+                      <div class="lg:w-1/4 lg:mr-8 w-full select-none cursor-pointer bg-gray-100 rounded-lg flex flex-1 items-center p-4  transition duration-500 shadow ease-in-out transform hover:-translate-y-1 hover:shadow-lg">
+                        <div class="flex-1 pl-1 mr-16">
+                          <div class="font-semibold"><%= product.title %></div>
+                          
+                          <div class="text-gray-600 font-medium text-sm maxlength="10>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</div>
+                        </div>
+                            <div class="flex-2 pl-1 mr-0">
+                          <div class="font-semibold"><%= product.price %></div>
+                          <%= button_to '+', line_items_path(product_id: product), class:"text-black font-medium text-sm mt-8 px-4 py-2 bg-blue rounded-full" %>
+                        <div id="<%= product.id %>"></div>
+                            </div>
+                      </div>
+                    </li>
+                  </ul>
+                  <div>
+
+                <% end %>
+              <% end %>
+            <% end %>
+        </div>
+
+      <% end %>
+    <% end %>
+  <% end %>
+
+
+<% if @cart %>
+<footer class='fixed bottom-0 w-full '>
+<div class="dropup w-full  bg-indigo-700 items-center text-indigo-100 leading-none rounded flex lg:inline-flex h-10">
+  <button class="w-full dropbtn "> Order | £<%= @cart.total_price %> </button>
+  <div class="dropup-content">
+    <div id="cart" class="carts fixed bottom-0 w-full">
+        <%= render_if @cart && @cart.line_items.any?, @cart %>
+      </div>
+  </div>
+</div>
+</footer>
+<% end %>
+
+</div>
+
+<div id="cart" class="carts">

@@ -27,6 +27,12 @@ Rails.application.routes.draw do
   get 'admin/edit'
   get 'admin/products'
   get 'admin/orderarchive'
+  get 'admin/landingpage'
+
+  get '/start', to: 'admin#landingpage'
+  get '/sales', to: 'admin#sales'
+
+  get "menu/:id" => "store#menu", as: :menu
 
   get '' => 'store#profile', constraints: {subdomain: /.+/}
 
