@@ -120,47 +120,11 @@ div.scrollmenu a {
 </div>
 
 
- <body class="font-sans container">
+  <body class="font-sans container">
       <div class="w-full md:w-3/5 mx-auto p-8">
-         <p> <strong>Drink</strong></p>
+         <p> <strong>Food</strong></p>
          <div class="shadow-md">
-          <% cache @categories do %>
-            <% @categories.where(user_id: @account.id).each do |category| %>
-              <% cache category do %>
-            <div class="tab w-full overflow-hidden border-t">
-               <input class="absolute opacity-0 " id="tab-multi-<%= category.category%>" type="checkbox" name="tabs">
-               <label class="block p-5 leading-normal cursor-pointer" for="tab-multi-<%= category.category%>"> <%= category.category%> </label>
-                <% cache @products do %>
-                <% @products.where(user_id: @account.id, category: category, available: 't').each do |product| %>
-                <% cache product do %>
-               <div class="tab-content overflow-hidden border-l-2 bg-gray-100 border-indigo-500 leading-normal">
-                 <ul class="flex flex-col p-2 ">
-                    <li class="border-gray-400 flex flex-row mb-2">
-                      <div class="lg:w-1/4 lg:mr-8 w-full select-none cursor-pointer bg-gray-100 rounded-lg flex flex-1 items-center p-4  transition duration-500 shadow ease-in-out transform hover:-translate-y-1 hover:shadow-lg">
-                        <div class="flex-1 pl-1 mr-16">
-                          <div class="font-semibold"><%= product.title %></div>
-                          
-                          <div class="text-gray-600 font-medium text-sm maxlength="10>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</div>
-                        </div>
-                            <div class="flex-2 pl-1 mr-0">
-                          <div class="font-semibold"><%= product.price %></div>
-                          <%= button_to '+', line_items_path(product_id: product), class:"text-black font-medium text-sm mt-8 px-4 py-2 bg-blue rounded-full" %>
-                        <div id="<%= product.id %>"></div>
-                            </div>
-                      </div>
-                    </li>
-                  </ul>
-                  </div>
-                  
-                <% end %>
-                <% end %>
-                <% end %>
-
-
-            </div>
-                <% end %>
-              <% end %>
-            <% end %>
+                 <%= render @categories %>
          </div>
       </div>
    </body>
