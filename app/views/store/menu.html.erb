@@ -92,7 +92,6 @@ div.scrollmenu a {
          background-color: #6574cd; /*.bg-indigo*/
          color: #f8fafc; /*.text-grey-lightest*/
          }
-
 </style>
 
  <body class="text-black bg-gray-100">
@@ -134,7 +133,6 @@ div.scrollmenu a {
                 <% cache @products do %>
                 <% @products.where(user_id: @account.id, category: category, available: 't').each do |product| %>
                 <% cache product do %>
-
                <div class="tab-content overflow-hidden border-l-2 bg-gray-100 border-indigo-500 leading-normal">
                  <ul class="flex flex-col p-2 ">
                     <li class="border-gray-400 flex flex-row mb-2">

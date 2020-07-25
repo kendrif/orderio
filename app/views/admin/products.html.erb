@@ -98,21 +98,10 @@
                                 <!-- <th class="text-left p-3 px-5">Status</th>
                                 <th class="text-left p-3 px-5">Toggle Status</th> -->
                                 <th class="text-left p-3 px-5">Edit</th>
-                                <th class="text-left p-3 px-5">Delete</th>
                             </tr>
 
-                           <% cache @Category do %>
-                              <% @categories.where(user_id: current_user.id ).each do |category| %>
-                                <% cache category do %>
-                            <tr class="border-b hover:bg-orange-100 bg-gray-100">
-                                <td class="p-3 px-5"><%= category.category %></td>
-                                <td class="p-3 px-5"><%= category.description %></td>
-                                <td class="p-3 px-5", id="button"><%= link_to 'Edit', edit_category_path(category) %></td>
-                                <td class="p-3 px-5">xyz</td>
-                            </tr>
-                                <% end %>
-                              <% end %>
-                            <% end %>
+                           <%= render @categories %>
+
                       </tbody>
                     </table>
                 </div>
@@ -143,9 +132,7 @@
                                 <th class="text-left p-3 px-5"></th>
                                 <th class="text-left p-3 px-5">Action</th>
                             </tr>
-
                         <%= render @products %>
-                        
                       </tbody>
                     </table>
                 </div>
