@@ -51,32 +51,29 @@ div.scrollmenu a {
   <h1 class="mb-0 text-2xl text-black font-light text-center pt-4">  <%= @account.s_name %> </h1> 
 </div>
 </div>
-<div class="scrollmenu sticky shadow bg-white top-0 z-10 p-4">
-<% cache @categories do %>
-    <% @categories.where(user_id: @account.id).each do |category| %>
-      <% cache category do %>
 
-  		<a href="#<%= category.category%>" class="bg-transparent hover:bg-blue text-gray-400 font-semibold hover:text-black py-2 px-4 border hover:border-transparent rounded mr-2"> <%= category.category %> </a>
-  
-                  <% end %>
-              <% end %>
-            <% end %>
+<div class="scrollmenu sticky shadow bg-white top-0 z-10 p-4 item-center flex">
+<a href="#food" class="bg-transparent hover:bg-blue text-gray-400 font-semibold hover:text-black py-2 px-4 border hover:border-transparent rounded mr-2 flex-1"> Food Menu</a>
+  	<a href="#drink" class="bg-transparent hover:bg-blue text-gray-400 font-semibold hover:text-black py-2 px-4 border hover:border-transparent rounded mr-2 flex-1"> Drink Menu </a>
 </div>
 
 
-<div class="pt-40">
-<% cache @categories do %>
-    <% @categories.where(user_id: @account.id).each do |category| %>
-      <% cache category do %>
-        <div class="relative w-full p-3 mb-1 rounded-lg bg-blue lg:w-1/4 lg:mr-8">
-            <h3 class="mb-2 text-3xl text-gray-700 font-black" id="<%= category.category %>"><%= category.category %></h3>
-        </div>
-
-        <div>
-            <% cache @products do %>
-              <% @products.where(user_id: @account.id, category: category, available: 't').each do |product| %>
+ <body class="font-sans container">
+      <div class="w-full md:w-3/5 mx-auto p-8">
+         <p> <strong>Drink</strong></p>
+         <div class="shadow-md">
+          <% cache @categories do %>
+            <% @categories.where(user_id: @account.id).each do |category| %>
+              <% cache category do %>
+            <div class="tab w-full overflow-hidden border-t">
+               <input class="absolute opacity-0 " id="tab-multi-<%= category.category%>" type="checkbox" name="tabs">
+               <label class="block p-5 leading-normal cursor-pointer" for="tab-multi-<%= category.category%>"> <%= category.category%> </label>
+                <% cache @products do %>
+                <% @products.where(user_id: @account.id, category: category, available: 't').each do |product| %>
                 <% cache product do %>
-                   <ul class="flex flex-col p-2">
+
+               <div class="tab-content overflow-hidden border-l-2 bg-gray-100 border-indigo-500 leading-normal">
+                 <ul class="flex flex-col p-2 ">
                     <li class="border-gray-400 flex flex-row mb-2">
                       <div class="lg:w-1/4 lg:mr-8 w-full select-none cursor-pointer bg-gray-100 rounded-lg flex flex-1 items-center p-4  transition duration-500 shadow ease-in-out transform hover:-translate-y-1 hover:shadow-lg">
                         <div class="flex-1 pl-1 mr-16">
@@ -92,16 +89,20 @@ div.scrollmenu a {
                       </div>
                     </li>
                   </ul>
-                  <div>
+                  </div>
+                  
+                <% end %>
+                <% end %>
+                <% end %>
 
+
+            </div>
                 <% end %>
               <% end %>
             <% end %>
-        </div>
-
-      <% end %>
-    <% end %>
-  <% end %>
+         </div>
+      </div>
+   </body>
 
 
 <% if @cart %>
