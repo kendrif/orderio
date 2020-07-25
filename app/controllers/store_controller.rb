@@ -9,9 +9,9 @@ class StoreController < ApplicationController
   end
 
   def menu
+    @account = User.find_by_id(params[:id])
     @products = Product.order(:title)
     @categories = Category.where(user_id: @account.id).order(:category)
-    @account = User.find_by_id(params[:id])
     render layout: false
   end
 
