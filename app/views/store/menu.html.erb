@@ -92,6 +92,7 @@ div.scrollmenu a {
          background-color: #6574cd; /*.bg-indigo*/
          color: #f8fafc; /*.text-grey-lightest*/
          }
+
 </style>
 
  <body class="text-black bg-gray-100">
@@ -113,22 +114,20 @@ div.scrollmenu a {
   <h1 class="mb-0 text-2xl text-black font-light text-center pt-4">  <%= @account.s_name %> </h1> 
 </div>
 </div>
-
 <div class="scrollmenu sticky shadow bg-white top-0 z-10 p-4 item-center flex">
-<a href="#food" class="bg-transparent hover:bg-blue text-gray-400 font-semibold hover:text-black py-2 px-4 border hover:border-transparent rounded mr-2 flex-1"> Food Menu</a>
-  	<a href="#drink" class="bg-transparent hover:bg-blue text-gray-400 font-semibold hover:text-black py-2 px-4 border hover:border-transparent rounded mr-2 flex-1"> Drink Menu </a>
+
+  <a href="#drink" class="bg-transparent hover:bg-blue text-gray-400 font-semibold hover:text-black py-2 px-4 border hover:border-transparent rounded mr-2 flex-1"> Drinks Menu </a>
 </div>
 
-
-  <body class="font-sans container">
+ <body class="font-sans container">
       <div class="w-full md:w-3/5 mx-auto p-8">
-         <p> <strong>Food</strong></p>
+         <p> <strong>Drinks</strong></p>
          <div class="shadow-md">
                  <%= render @categories %>
          </div>
       </div>
    </body>
-
+</div>
 
 <% if @cart %>
 <footer class='fixed bottom-0 w-full '>
@@ -142,7 +141,6 @@ div.scrollmenu a {
 </div>
 </footer>
 <% end %>
-
 </div>
 
 <div id="cart" class="carts">
