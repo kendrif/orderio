@@ -99,7 +99,7 @@
                                 <!-- <th class="text-left p-3 px-5">Status</th>
                                 <th class="text-left p-3 px-5">Toggle Status</th> -->
                                 <th class="text-left p-3 px-5">Edit</th>
-                                <th class="text-left p-3 px-5">Delete</th>
+                               <!-- <th class="text-left p-3 px-5">Delete</th> -->
                             </tr>
 
                             <% cache @categories do %>
@@ -109,7 +109,7 @@
                                 <td class="p-3 px-5"><%= category.category %></td>
                                 <td class="p-3 px-5"><%= category.description %></td>
                                 <td class="p-3 px-5", id="button"><%= link_to 'Edit', edit_category_path(category) %></td>
-                                <td class="p-3 px-5">xyz</td>
+                                <!-- <td class="p-3 px-5">xyz</td>
                             </tr>
                                 <% end %>
                               <% end %>
