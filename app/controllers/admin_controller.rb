@@ -46,6 +46,6 @@ class AdminController < ApplicationController
   def products
     @total_orders = Order.count
     @products = Product.where(user_id: current_user.id).order(:title)
-    @categories = Category.order(:category)
+    @categories = Category.where(user_id: current_user.id).order(:title)
   end
 end
