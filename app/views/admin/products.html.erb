@@ -77,7 +77,7 @@
 
       <!-- Page Heading -->
       <div class="flex-1 px-6 mb-4">
-        <h1 class="mb-2 text-3xl text-gray-700"> Admin | Product and Category Inventory </h1>
+        <h1 class="mb-2 text-3xl text-gray-700"> Admin | Inventory </h1>
 
            <!-- Charts Row  -->
         <div class="flex flex-wrap mb-2 -mx-3">
@@ -102,7 +102,7 @@
                                 <th class="text-left p-3 px-5">Delete</th>
                             </tr>
 
-                            <% cache @Category do %>
+                            <% cache @categories do %>
                               <% @categories.where(user_id: current_user.id ).each do |category| %>
                                 <% cache category do %>
                             <tr class="border-b hover:bg-orange-100 bg-gray-100">
