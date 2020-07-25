@@ -299,4 +299,5 @@ Devise.setup do |config|
   config.omniauth :stripe_connect, Rails.application.credentials.dig(:stripe, :connect_client_id), Rails.application.credentials.dig(:stripe, :private_key),
   scope: 'read_write',
   stripe_landing: 'login'
+  
 end
