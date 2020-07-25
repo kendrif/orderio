@@ -17,7 +17,7 @@ class StoreController < ApplicationController
 
   def profile
     @products = Product.order(:title)
-    @categories = Category.order(:category)
+    @categories = Category.where(user_id: @account.id).order(:category)
     @account = User.find_by_subdomain!(request.subdomain)
     render layout: false
   end
