@@ -20,7 +20,8 @@
                       <div class="lg:w-1/4 lg:mr-8 w-full select-none cursor-pointer bg-white rounded-lg flex flex-1 items-center p-4  transition duration-500 shadow ease-in-out transform hover:-translate-y-1 hover:shadow-lg">
                             <div class="flex-1 pl-1 mr-0">
                                <div class="font-semibold"><%= product.title %></div>
-                          <div class="text-black font-medium text-sm mt-8 py-2 bg-blue rounded-full"> <%= sprintf("£%0.02f", product.price ) %> </div>
+                              <div class="text-gray-600 font-medium text-sm maxlength=10"> <%= product.description%> </div>
+                          <div class="text-black font-medium text-sm mt-4 py-2 bg-blue rounded-full"> <%= sprintf("£%0.02f", product.price ) %> </div>
                         <div id="<%= product.id %>"></div>
                             </div>
 
