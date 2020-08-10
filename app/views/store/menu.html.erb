@@ -132,7 +132,7 @@ div.scrollmenu a {
 <% if @cart %>
 <footer class='fixed bottom-0 w-full '>
 <div class="dropup w-full  bg-indigo-700 items-center text-indigo-100 leading-none rounded flex lg:inline-flex h-10">
-  <button class="w-full dropbtn "> Order | £<%= @cart.total_price %> </button>
+  <button class="w-full dropbtn "> Order | <%= sprintf("£%0.02f", @cart.total_price ) %></button>
   <div class="dropup-content">
     <div id="cart" class="carts fixed bottom-0 w-full">
         <%= render_if @cart && @cart.line_items.any?, @cart %>
