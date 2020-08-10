@@ -14,7 +14,7 @@
     <div class="">
 
      <button class="w-full "> 
-       <%= link_to "Confirm Order | £#{cart.total_price}", new_order_path(amount: cart.total_price, account_id: @account.id), method: :get, class: "bg-indigo-700 items-center text-indigo-100 leading-none lg:rounded-full flex lg:inline-flex h-10" %>
+       <%= link_to "Confirm Order | #{sprintf("£%0.02f", cart.total_price)} ", new_order_path(amount: cart.total_price, account_id: @account.id), method: :get, class: "bg-indigo-700 items-center text-indigo-100 leading-none lg:rounded-full flex lg:inline-flex h-10" %>
       </button>
       </div>
     </div>

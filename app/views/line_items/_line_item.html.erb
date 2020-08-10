@@ -17,7 +17,7 @@
 
                         </div>
                         <div class="flex flex-col w-32 font-medium">
-                            <div class="mb-6 text-black"> £ <%= line_item.total_price %></div>
+                            <div class="mb-6 text-black"> <%= sprintf("£%0.02f", line_item.total_price) %></div>
                             </div>
 
                     </div>
