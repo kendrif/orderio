@@ -13,6 +13,5 @@ require("trix")
 require("@rails/actiontext")
 
 import "stylesheets/application"
-import "../src/application.css"
 import "controllers"
 import "components/stripe";
