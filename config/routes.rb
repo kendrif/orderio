@@ -13,6 +13,7 @@ Rails.application.routes.draw do
       patch :available 
     end
   end
+  
 
   resources :categories do
     member do 
@@ -21,6 +22,7 @@ Rails.application.routes.draw do
   end
 
   devise_for :users, controllers: { omniauth_callbacks: "omniauth_callbacks" } 
+  get '/users/sign_out' => 'devise/sessions#destroy'
   
   resources :categories
   get 'users/show'
@@ -54,7 +56,6 @@ Rails.application.routes.draw do
   
 
   resource :subscription
-
   root to: 'admin#landingpage'
 
 end
