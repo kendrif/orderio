@@ -115,13 +115,33 @@ div.scrollmenu a {
 </div>
 </div>
 <div class="scrollmenu sticky shadow bg-white top-0 z-10 p-4 item-center flex">
+  <% if request.fullpath.include?('Drink') %>
+  <a href="?Drink" class="bg-transparent hover:bg-blue text-black font-semibold text-black py-2 px-4 border border-black rounded mr-2 flex-1"> Drinks Menu </a>
+  <% else %>
+ <a href="?Drink" class="bg-transparent hover:bg-blue text-gray-400 font-semibold hover:text-black py-2 px-4 border hover:border-transparent rounded mr-2 flex-1"> Drinks Menu </a>
+  <% end %>
 
-  <a href="#drink" class="bg-transparent hover:bg-blue text-gray-400 font-semibold hover:text-black py-2 px-4 border hover:border-transparent rounded mr-2 flex-1"> Drinks Menu </a>
+<% if request.fullpath.include?('Food') %>
+  <a href="?Food" class="bg-transparent hover:bg-blue text-black font-semibold text-black py-2 px-4 border border-black rounded mr-2 flex-1"> Food Menu </a>
+  <% else %>
+ <a href="?Food" class="bg-transparent hover:bg-blue text-gray-400 font-semibold hover:text-black py-2 px-4 border active:bg-blue-700 hover:border-transparent rounded mr-2 flex-1"> Food Menu </a>
+  <% end %>
+
+
 </div>
 
  <body class="font-sans container">
       <div class="w-full md:w-3/5 mx-auto p-8">
-         <p> <strong>Drinks</strong></p>
+      <% if request.fullpath.include?('Food') %>
+         <p> <strong>Food Menu</strong></p>
+      <% else %>
+        <% if request.fullpath.include?('Drink') %>
+        <p> <strong>Drink Menu</strong></p>
+        <% else %>
+         <p> <strong>Menu</strong></p>
+         <% end %>
+      <% end %>
+      
          <div class="shadow-md">
                  <%= render @categories %>
          </div>

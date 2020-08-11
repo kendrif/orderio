@@ -2,7 +2,8 @@
                             <tr class="border-b hover:bg-orange-100 bg-gray-100">
                                 <td class="p-3 px-5"><%= product.title %></td>
                                 <td class="p-3 px-5"><%= sanitize(product.description) %></td>
-                                <td class="p-3 px-5"> £ <%= (product.price) %></td>
+                                <td class="p-3 px-5"> <%= sprintf("£%0.02f", product.price ) %></td>
+                                
                                 <td class="p-3 px-5"><%= product.category_id %></td>
                                 <% if (product.available) #= 't' %>
                                 <td class="p-3 px-5"> <span class="rounded bg-green-400 py-1 px-3 text-xs font-bold">active</span> </td>

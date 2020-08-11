@@ -6,7 +6,7 @@ class Category < ApplicationRecord
     belongs_to :user
 
     enum Type: {
-        "Food Menu" => "Food Menu",
-        "Drinks Menu" => "Drinks Menu"
+        "Food Menu" => "food",
+        "Drinks Menu" => "drink"
     }
 end
