@@ -2,7 +2,6 @@ class AdminController < ApplicationController
   before_action :set_account, only: [:profile]
 
   def landingpage
-    render layout: false
   end
 
   def index

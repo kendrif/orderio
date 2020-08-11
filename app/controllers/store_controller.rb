@@ -21,7 +21,6 @@ class StoreController < ApplicationController
       @categories = Category.where(user_id: @account.id).order(:category)
       end 
    end
-    render layout: false
   end
 
   def profile
