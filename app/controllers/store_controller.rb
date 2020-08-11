@@ -10,20 +10,13 @@ class StoreController < ApplicationController
 
   def menu
     @account = User.find_by_id(params[:id])
-    @products = Product.order(:title)
-
-     if request.fullpath.include?('Food') 
-    @categories = Category.where(user_id: @account.id, Type: 'food').order(:category)
-     else 
-    @categories = Category.where(user_id: @account.id, Type: 'drink').order(:category)
-     end
-
+    @products = Product.where(available: 't').order(:title)
 
       if request.fullpath.include?('Food') 
      @categories = Category.where(user_id: @account.id, Type: 'food').order(:category)
       else 
          if request.fullpath.include?('Drink')
-      @categories = Category.where(user_id: @account.id, Type: 'drink').order(:category)
+      @categories = Category.where(user_id: @account.id, Type: 'drink', ).order(:category)
      else 
       @categories = Category.where(user_id: @account.id).order(:category)
       end 
