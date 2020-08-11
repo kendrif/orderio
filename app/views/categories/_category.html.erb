@@ -10,7 +10,7 @@
 <% else %>
 
     <div class="tab w-full overflow-hidden border-t">
-       <input class="absolute opacity-0 " id="tab-multi-<%= category.category%>" type="checkbox" name="tabs">
+       <input class="absolute opacity-0 " id="tab-multi-<%= category.category %>" type="checkbox" name="tabs">
        <label class="block p-5 leading-normal cursor-pointer" for="tab-multi-<%= category.category%>"> <%= category.category%> </label>
 
         <%= render(category.products) %>

@@ -1,7 +1,16 @@
   <% if request.fullpath.include?('admin') %>
+
+  <style>
+  .max {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 200px;
+}
+  </style>
                             <tr class="border-b hover:bg-orange-100 bg-gray-100">
                                 <td class="p-3 px-5"><%= product.title %></td>
-                                <td class="p-3 px-5"><%= sanitize(product.description) %></td>
+                                <td class="p-3 px-5 max"><%= sanitize(product.description) %></td>
                                 <td class="p-3 px-5"> <%= sprintf("£%0.02f", product.price ) %></td>
                                 
                                 <td class="p-3 px-5"><%= product.category_id %></td>
@@ -21,11 +30,10 @@
                       <div class="lg:w-1/4 lg:mr-8 w-full select-none cursor-pointer bg-white rounded-lg flex flex-1 items-center p-4  transition duration-500 shadow ease-in-out transform hover:-translate-y-1 hover:shadow-lg">
                             <div class="flex-1 pl-1 mr-0">
                                <div class="font-semibold"><%= product.title %></div>
-                              <div class="text-gray-600 font-medium text-sm maxlength=10"> <%= product.description%> </div>
+                              <div class="text-gray-600 font-normal text-xs"> <%= product.description%> </div>
                           <div class="text-black font-medium text-sm mt-4 py-2 bg-blue rounded-full"> <%= sprintf("£%0.02f", product.price ) %> </div>
                         <div id="<%= product.id %>"></div>
                             </div>
-
                             <div class="flex-2 pl-1 mr-0">
                           <%= button_to 'Add to Order', line_items_path(product_id: product), class:"text-black font-medium text-sm mt-8 px-4 py-2 bg-blue rounded-full" %>
                         <div id="<%= product.id %>"></div>
