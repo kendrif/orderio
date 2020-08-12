@@ -1,3 +1,18 @@
+    <% if request.fullpath.include?('admin') %>
+
+                                <tr class="border-b hover:bg-orange-100 bg-gray-100">
+                                <td class="p-3 px-5"><%= line_item.product.title %></td>
+                                <td class="p-3 px-5"><%= line_item.quantity %></td>
+                                <td class="p-3 px-5"><%= sprintf("£%0.02f", line_item.product.price) %></td>
+                                <td class="p-3 px-5"><%= sprintf("£%0.02f", line_item.product.price * line_item.quantity) %></td>
+
+                                <td class="p-3 px-5"></td>
+                                <td class="p-3 px-5"></td>
+                                <td class="p-3 px-5"></td>
+                            </tr>
+                        
+    <% else %>
+
           <% if line_item == @current_item %>
           <tr class = "line-item-highlight">
           <% else %>
@@ -22,3 +37,5 @@
 
                     </div>
           </tr> 
+
+    <% end %>

@@ -1,19 +1,21 @@
 class AdminController < ApplicationController
+
   before_action :set_account, only: [:profile]
 
   def landingpage
   end
 
   def index
-    @total_orders = Order.count
+    @total_orders = Order.where(complete: 'f', OrderFini: 't', Storeid: current_user.id).count
     @orders = Order.order(:created_at)
+
   end
 
   def sales
   end
 
   def order
-    @total_orders = Order.count
+    @total_orders = Order.where(complete: 'f', OrderFini: 't', Storeid: current_user.id).count
     @orders = Order.where(complete: 'f', OrderFini: 't', Storeid: current_user.id).order(:created_at)
     @products = Product.order(:title)
     @line_items = LineItem.find_by_id(params[:id])

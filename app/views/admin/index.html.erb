@@ -168,22 +168,45 @@ body {
 
         <!-- Content Row -->
         <div class="grid grid-cols-1 mb-2 -mx-3 md:grid-cols-2 lg:grid-cols-2 xl:grid-cols-4">
-          <!-- Earnings (Monthly) Card Example -->
-          <div class="p-3 md:w-full">
-            <div class="p-3 bg-white border-l-4 border-blue-600 rounded-md shadow">
+          <div class="w-full p-3">
+            <div class="p-3 bg-white border-l-4 border-indigo-600 rounded-md shadow">
               <div class="flex items-center justify-between p-2">
+                <div class="w-full pr-2">
+                  <div class="mb-1 text-xs font-semibold leading-5 text-indigo-600 uppercase">Incomplete Orders </div>
+                  <div class="text-xl font-bold text-gray-700"> <%= @total_orders %> </div>
+                </div>
                 <div>
                   <svg fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                     viewBox="0 0 24 24" class="w-8 h-8 text-gray-400">
                     <path
-                      d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z">
+                      d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z">
                     </path>
                   </svg>
                 </div>
               </div>
             </div>
           </div>
-          <!-- Earnings (Monthly) Card Example 
+
+          <div class="w-full p-3">
+            <div class="p-3 bg-white border-l-4 border-indigo-600 rounded-md shadow">
+              <div class="flex items-center justify-between p-2">
+                <div class="w-full pr-2">
+                  <div class="mb-1 text-xs font-semibold leading-5 text-indigo-600 uppercase">Total Orders Today</div>
+                  <div class="text-xl font-bold text-gray-700"> <%= @total_orders %>  </div>
+                </div>
+                <div>
+                  <svg fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                    viewBox="0 0 24 24" class="w-8 h-8 text-gray-400">
+                    <path
+                      d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z">
+                    </path>
+                  </svg>
+                </div>
+              </div>
+            </div>
+          </div>
+          
+          <!-- Earnings (Monthly) Card Example  
           <div class="w-full p-3">
             <div class="p-3 bg-white border-l-4 border-indigo-600 rounded-md shadow">
               <div class="flex items-center justify-between p-2">
