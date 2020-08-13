@@ -48,7 +48,7 @@ class SubscriptionsController < ApplicationController
 
   rescue Stripe::CardError => e
     flash[:error] = e.message
-    redirect_to new_subscription_path
+    redirect_to new_subscription_path(:account_id => @account, :amount => @order.amount, :order => @order)
 
   rescue Stripe::StripeError
     render status: :bad_request
