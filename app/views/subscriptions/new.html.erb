@@ -1,9 +1,26 @@
 <div class="w-full mx-auto">
-  <h3 class="mb-2 text-2xl font-bold text-black text-center">  <em><%= @account.s_name %> | Checkout </em></h3>
 
+  <% flash.each do |type, message| %>
+    <% if type == "alert" %>
+      <div class="bg-red-500">
+        <div class="container px-2 py-4 mx-auto font-sans font-medium text-center text-white"><%= message %></div>
+      </div>
+    <% end %>
+    <% if type == "notice" %>
+      <div class="bg-green-500">
+        <div class="container px-2 py-4 mx-auto font-sans font-medium text-center text-white"><%= message %></div>
+      </div>
+    <% end %>
+  <% end %>
+
+<div class="h-24">
+</div>
+  <h3 class="mb-2 text-2xl font-bold text-black text-center">  <em><%= @account.s_name %> | Checkout </em></h3>
 
   <div class=" border rounded">
     <%= render "form", account: @account %>
   </div>
+
+
 
 </div>

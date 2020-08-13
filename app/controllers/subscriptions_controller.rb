@@ -46,9 +46,9 @@ class SubscriptionsController < ApplicationController
     redirect_to session.delete(:return_to), notice: "Your order has been successful 👌🏼"
 
 
-  rescue Stripe::CardError => e
-    flash[:error] = e.message
-    redirect_to new_subscription_path(:account_id => @account, :amount => @order.amount, :order => @order), notice: "There has been an error with your payment. Please try again."
+    rescue Stripe::CardError => e
+      flash[:error] = e.message
+      redirect_to new_subscription_path(:account_id => @account, :amount => @order.amount, :order => @order), notice: "There has been an error with your payment. Please try again."
     
   end
 
