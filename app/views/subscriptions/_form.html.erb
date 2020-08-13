@@ -14,5 +14,6 @@
   <input type="hidden" name="account_id" value="<%= params[:account_id] %>">
   <input type="hidden" name="order" value="<%= params[:order] %>">
 
-  <button> Pay £<%=(params[:amount]) %></button>
+  <button> Pay<%= sprintf("£%0.02f", (params[:amount]) ) %></button>
+
 <% end %>

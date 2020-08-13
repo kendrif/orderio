@@ -38,7 +38,7 @@ class OrdersController < ApplicationController
         Cart.destroy(session[:cart_id])
         session[:cart_id] = nil
         format.html { redirect_to new_subscription_path(account_id: @order.Storeid, order: @order.id, amount: @order.amount) }
-        format.json { render :show, status: :created, location: @order }
+        format.json { render :show, status: :created, location: @order}
       else
         format.html { render :new }
         format.json { render json: @order.errors, status: :unprocessable_entity }

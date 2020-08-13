@@ -1,5 +1,5 @@
 class OrderMailer < ApplicationMailer
-  default from: 'Sam Ruby <orderio@example.com>'
+  default from: 'Menuio <menuio.test@gmail.com>'
 
   # Subject can be set in your I18n file at config/locales/en.yml
   # with the following lookup:
@@ -9,7 +9,7 @@ class OrderMailer < ApplicationMailer
   def recived(order)
     @order = order
 
-    mail to: order.email, subject: 'Orderio confirmation '
+    mail to: @order.email, subject: "ORDER RECEIPT"
 
   end
 

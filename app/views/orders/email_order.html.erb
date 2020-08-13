@@ -1,0 +1,29 @@
+
+                        <tbody>
+                            <tr class="border-b bg-gray-600">
+                                <th class="text-left p-3 px-5">Customer Name</th>
+                                <th class="text-left p-3 px-5">Table No.</th>
+                                <th class="text-left p-3 px-5">Contact Email</th>
+                                <th class="text-left p-3 px-5">Contact Number</th>
+                                <th class="text-left p-3 px-5">Order Placed at:</th>
+                                <th class="text-left p-3 px-5">Order Total</th>
+                            </tr>
+                           <tr class="border-b hover:bg-orange-100 bg-gray-300">
+                                <td class="p-3 px-5"><%= order.name %></td>
+                                <td class="p-3 px-5"><%= order.Table %></td>
+                                <td class="p-3 px-5"><%= order.email %></td>
+                                <td class="p-3 px-5"><%= order.Number %></td>
+                                <td class="p-3 px-5"><%= order.created_at %></td>
+                                <td class="p-3 px-5">£<%= order.amount %></td>
+                            </tr>
+
+                            <tr class="border-b">
+                                <th class="text-left p-3 px-5">Ordered Items</th>
+                                <th class="text-left p-3 px-5">Quantity</th>
+                                <th class="text-left p-3 px-5">Price Per Item</th>
+                                <th class="text-left p-3 px-5">Total Price Per Item</th>
+                                <th class="text-left p-3 px-5"></th>
+                                <th class="text-left p-3 px-5"></th>
+                            </tr>
+                            <%= render partial: "line_items/email_line_item", locals: { line_item: @order.line_items } %> %>
+                        </tbody>

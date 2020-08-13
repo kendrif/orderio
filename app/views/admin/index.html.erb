@@ -27,7 +27,27 @@
       font-size: 10px;
       padding: 2px 4px;
     }
-  </style>
+
+  /* since nested groupes are not supported we have to use 
+     regular css for the nested dropdowns 
+  */
+  li>ul                 { transform: translatex(100%) scale(0) }
+  li:hover>ul           { transform: translatex(101%) scale(1) }
+  li > button svg       { transform: rotate(-90deg) }
+  li:hover > button svg { transform: rotate(-270deg) }
+
+  /* Below styles fake what can be achieved with the tailwind config
+     you need to add the group-hover variant to scale and define your custom
+     min width style.
+  	 See https://codesandbox.io/s/tailwindcss-multilevel-dropdown-y91j7?file=/index.html
+  	 for implementation with config file
+  */
+  .group:hover .group-hover\:scale-100 { transform: scale(1) }
+  .group:hover .group-hover\:-rotate-180 { transform: rotate(180deg) }
+  .scale-0 { transform: scale(0) }
+  .min-w-32 { min-width: 8rem }
+</style>
+
 </head>
 
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/material-design-icons/3.0.1/iconfont/material-icons.min.css" integrity="sha256-x8PYmLKD83R9T/sYmJn1j3is/chhJdySyhet/JuHnfY=" crossorigin="anonymous" />
@@ -70,12 +90,22 @@ body {
           >
             <span><i class="fa fa-question-circle" aria-hidden="true"></i></span>
           </a>
-          <a
-            href="#"
-            class="lg:inline-flex lg:w-auto w-full px-3 py-2 rounded text-gray-400 items-center justify-center hover:bg-gray-900 hover:text-white"
-          >
-            <span><i class="fa fa-user" aria-hidden="true"></i></span>
-          </a>
+          <div class="group inline-block">
+  <button
+    class="lg:inline-flex px-3 py-2 rounded text-gray-400 items-center justify-center hover:bg-gray-900 hover:text-white min-w-32"
+  >
+    <span><i class="fa fa-user" aria-hidden="true"></i></span>
+  </button>
+  <ul
+    class="bg-white border rounded-sm transform scale-0 group-hover:scale-100 absolute 
+  transition duration-150 ease-in-out origin-top min-w-32"
+  >
+    <li> <%= link_to "Sign Out", destroy_user_session_path, class:"rounded-sm px-3 py-1 hover:bg-gray-100" %> </li>
+
+         
+  </ul>
+</div>
+
         </div>
          <div
           class="lg:inline-flex lg:flex-row lg:ml-auto lg:w-auto w-full lg:items-center items-start  flex flex-col lg:h-auto lg:hidden"

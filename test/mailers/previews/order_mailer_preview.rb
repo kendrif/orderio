@@ -3,7 +3,8 @@ class OrderMailerPreview < ActionMailer::Preview
 
   # Preview this email at http://localhost:3000/rails/mailers/order_mailer/recived
   def recived
-    OrderMailer.recived
+    order = Order.last
+    OrderMailer.recived(order)
   end
 
   # Preview this email at http://localhost:3000/rails/mailers/order_mailer/shipped
