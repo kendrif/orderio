@@ -40,9 +40,13 @@ class SubscriptionsController < ApplicationController
       card_exp_year: params[:user][:card_exp_year],
       card_type: params[:user][:card_brand]
     )
+
     OrderMailer.recived(@order).deliver_now
     OrderFiniJob.perform_now(@order)
     redirect_to session.delete(:return_to), notice: "Your order has been successful 👌🏼"
+
+  rescue Stripe::StripeError
+    render status: :bad_request
     
   end
 
