@@ -43,12 +43,11 @@ class SubscriptionsController < ApplicationController
 
     OrderFiniJob.perform_now(@order)
     redirect_to session.delete(:return_to), notice: "Your order has been successful 👌🏼"
-    OrderMailer.recived(@order).deliver_later
 
   rescue Stripe::CardError => e
     flash[:error] = e.message
-    redirect_to new_subscription_path(:account_id => @account, :amount => @order.amount, :order => @order), notice: "There has been an error with your payment. Please try again."
-
+    format.html { redirect_to new_subscription_path(:account_id => @account, :amount => @order.amount, :order => @order), notice: "There has been an error with your payment. Please try again." }
+  
   rescue => e
     flash[:error] = e.message
     redirect_to new_subscription_path(:account_id => @account, :amount => @order.amount, :order => @order), notice: "There has been an issue."
