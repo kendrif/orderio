@@ -42,6 +42,7 @@ class SubscriptionsController < ApplicationController
     )
 
     OrderFiniJob.perform_now(@order)
+    OrderMailer.recived(@order).deliver_now
     redirect_to session.delete(:return_to), notice: "Your order has been successful 👌🏼"
 
   rescue Stripe::CardError => e

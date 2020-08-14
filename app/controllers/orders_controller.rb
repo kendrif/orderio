@@ -37,7 +37,6 @@ class OrdersController < ApplicationController
       if @order.save
         Cart.destroy(session[:cart_id])
         session[:cart_id] = nil
-        OrderMailer.recived(@order).deliver_now
         format.html { redirect_to new_subscription_path(account_id: @order.Storeid, order: @order.id, amount: @order.amount) }
         format.json { render :show, status: :created, location: @order}
       else
