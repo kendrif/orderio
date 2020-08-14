@@ -15,7 +15,7 @@ class SubscriptionsController < ApplicationController
     account_suid = @account.uid
     @order = Order.find(params[:order])
     charge = @order.amount * 100
-    fee = @order.amount * 1.5
+    fee = @order.amount * 1
   
     token = params[:stripeToken]
     customer = Stripe::Customer.create(email: @order.email, source: token)
@@ -47,9 +47,9 @@ class SubscriptionsController < ApplicationController
 
 
     rescue Stripe::CardError => e
-      flash[:error] = e.message	
-      redirect_to new_subscription_path(:account_id => @account, :amount => @order.amount, :order => @order), notice: "There has been an error with your payment. Please try again."		  
-
+      flash[:error] = e.message
+      redirect_to new_subscription_path(:account_id => @account, :amount => @order.amount, :order => @order), notice: "There has been an error with your payment. Please try again."
+    
   end
 
 end
