@@ -17,7 +17,12 @@ class SubscriptionsController < ApplicationController
     charge = @order.amount * 100
     fee = @order.amount * 1.5
     
-  
+    if fee < 100
+      feecharge = 0
+    else
+      feecharge = fee 
+    end 
+
     token = params[:stripeToken]
     customer = Stripe::Customer.create(email: @order.email, source: token)
  
@@ -27,7 +32,7 @@ class SubscriptionsController < ApplicationController
        confirm: true,
        currency: 'gbp',
        payment_method_types: ['card'],
-       application_fee_amount: (fee).to_i,
+       application_fee_amount: (feecharge).to_i,
      }, {
        stripe_account: account_suid
      })
