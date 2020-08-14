@@ -181,39 +181,6 @@ body {
 <body>
   <div x-data="{sidebar : true}" class="flex ">
 
-    <!-- Left Sidebar -->
-    <div class="h-screen border-r lg:fixed lg:w-56 bg-white left-0 top-0 hidden lg:block" :class="{ 'md:block hidden' : sidebar == false }">
-      <div
-        class="items-center px-4 py-4 font-bold leading-10 tracking-wider text-center text-indigo-600 uppercase lg:flex h-18 text-md">
-        <span class="hidden ml-2 lg:inline-block"> Admin</span>
-      </div>
-      <hr class="mx-4 divider">
-      <div class="mx-2 lg:mx-4">
-        <hr class="divider">
-         <div class="items-center block py-4 tracking-wide text-center text-indigo-600 lg:flex lg:text-sm hover:text-indigo-600">
-          <i class="block fa fa-tachometer-alt p-2"></i>
-          <%= link_to "Dashboard", admin_index_path, class:"items-center block py-4 tracking-wide text-center text-gray-400 lg:flex lg:text-sm hover:text-indigo-600" %>
-        </div>
-
-        <hr class="divider">
-         <div class="items-center block py-4 tracking-wide text-center text-gray-400 lg:flex lg:text-sm hover:text-indigo-600 ">
-          <i class="fa fa-list-ul p-2"></i>
-          <%= link_to "Orders", admin_order_path, class:"items-center block py-1 tracking-wide text-center text-gray-400 lg:flex lg:text-sm hover:text-indigo-600" %>
-        </div>
-
-        <hr class="divider">
-         <div class="items-center block py-4 tracking-wide text-center text-gray-400 lg:flex lg:text-sm hover:text-indigo-600">
-          <i class="fa fa-archive p-2"></i>
-          <%= link_to "Orders Archive", admin_orderarchive_path, class:"items-center block py-1 tracking-wide text-center text-gray-400 lg:flex lg:text-sm hover:text-indigo-600" %>
-        </div>
-
-         <div class="items-center block py-4 tracking-wide text-center text-gray-400 lg:flex lg:text-sm hover:text-indigo-600">
-          <i class="fa fa-folder p-2"></i>
-          <%= link_to "Inventory Management", admin_products_path, class:"items-center block py-4 tracking-wide text-center text-gray-400 lg:flex lg:text-sm hover:text-indigo-600" %>
-        </div>
-
-      </div>
-    </div>
 
     <!-- Main content area -->
     <div class="flex-1 bg-gray-100 lg:ml-24 lg:ml-56">
