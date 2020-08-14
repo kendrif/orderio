@@ -30,9 +30,14 @@ class SubscriptionsController < ApplicationController
      }, {
        stripe_account: account_suid
      })
+
+    redirect_to session.delete(:return_to), notice: "Your order has been mong 👌🏼"
+
     options = {
       stripe_id: customer.id
     }
+
+    redirect_to session.delete(:return_to), notice: "Your order has been pepe"
 
     options.merge!(
       card_last4: params[:user][:card_last4],
@@ -42,7 +47,9 @@ class SubscriptionsController < ApplicationController
     )
 
     OrderMailer.recived(@order).deliver_now
+
     OrderFiniJob.perform_now(@order)
+
     redirect_to session.delete(:return_to), notice: "Your order has been successful 👌🏼"
 
 
