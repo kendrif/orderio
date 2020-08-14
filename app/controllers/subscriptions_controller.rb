@@ -26,7 +26,7 @@ class SubscriptionsController < ApplicationController
        confirm: true,
        currency: 'gbp',
        payment_method_types: ['card'],
-       application_fee_amount: (feecharge).to_i,
+       application_fee_amount: (fee).to_i,
      }, {
        stripe_account: account_suid
      })
@@ -43,6 +43,7 @@ class SubscriptionsController < ApplicationController
 
     OrderMailer.recived(@order).deliver_now
     OrderFiniJob.perform_now(@order)
+
     redirect_to session.delete(:return_to), notice: "Your order has been successful 👌🏼"
 
   end
