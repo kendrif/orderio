@@ -1,0 +1,487 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Tailwind Admin Template</title>
+  <link rel="stylesheet" href="public/css/tailwind.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/css/all.min.css">
+  <link
+    href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i"
+    rel="stylesheet">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.2/Chart.bundle.min.js"
+    integrity="sha256-XF29CBwU1MWLaGEnsELogU6Y6rcc5nCkhhx89nFMIDQ=" crossorigin="anonymous"></script>
+
+
+</head>
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/material-design-icons/3.0.1/iconfont/material-icons.min.css" integrity="sha256-x8PYmLKD83R9T/sYmJn1j3is/chhJdySyhet/JuHnfY=" crossorigin="anonymous" />
+<link href="https://fonts.googleapis.com/css2?family=Rubik:wght@300;400;500;700;900&display=swap" rel="stylesheet">
+<style>
+
+         /* Tab content - closed */
+         .tab-content {
+         max-height: 0;
+         -webkit-transition: max-height .35s;
+         -o-transition: max-height .35s;
+         transition: max-height .35s;
+         }
+         /* :checked - resize to full height */
+         .tab input:checked ~ .tab-content {
+         max-height: 100vh;
+         }
+         /* Label formatting when open */
+         .tab input:checked + label{
+         /*@apply text-xl p-5 border-l-2 border-indigo-500 bg-gray-100 text-indigo*/
+         font-size: 1.25rem; /*.text-xl*/
+         padding: 1.25rem; /*.p-5*/
+         border-left-width: 2px; /*.border-l-2*/
+         border-color: #6574cd; /*.border-indigo*/
+         background-color: #f8fafc; /*.bg-gray-100 */
+         color: #6574cd; /*.text-indigo*/
+         }
+         /* Icon */
+         .tab label::after {
+         float:right;
+         right: 0;
+         top: 0;
+         display: block;
+         width: 1.5em;
+         height: 1.5em;
+         line-height: 1.5;
+         font-size: 1.25rem;
+         text-align: center;
+         -webkit-transition: all .35s;
+         -o-transition: all .35s;
+         transition: all .35s;
+         }
+         /* Icon formatting - closed */
+         .tab input[type=checkbox] + label::after {
+         content: "+";
+         font-weight:bold; /*.font-bold*/
+         border-width: 1px; /*.border*/
+         border-radius: 9999px; /*.rounded-full */
+         border-color: #b8c2cc; /*.border-grey*/
+         }
+         .tab input[type=radio] + label::after {
+         content: "\25BE";
+         font-weight:bold; /*.font-bold*/
+         border-width: 1px; /*.border*/
+         border-radius: 9999px; /*.rounded-full */
+         border-color: #b8c2cc; /*.border-grey*/
+         }
+         /* Icon formatting - open */
+         .tab input[type=checkbox]:checked + label::after {
+         transform: rotate(315deg);
+         background-color: #6574cd; /*.bg-indigo*/
+         color: #f8fafc; /*.text-grey-lightest*/
+         }
+         .tab input[type=radio]:checked + label::after {
+         transform: rotateX(180deg);
+         background-color: #6574cd; /*.bg-indigo*/
+         color: #f8fafc; /*.text-grey-lightest*/
+         }
+
+  html,
+body {
+  font-family: "Rubik", sans-serif;
+}
+
+/* navigation 
+ - show navigation always on the large screen devices with (min-width:1024)
+*/
+
+@media (min-width: 1024px) {
+  .top-navbar {
+    display: inline-flex !important;
+  }
+}
+
+</style>
+
+<nav class="flex items-center bg-white w-full p-3 flex-wrap border-b-2 right-0 absolute">
+      <button
+        class="text-indigo-600 inline-flex p-3 hover:bg-indigo-600 rounded lg:hidden ml-auto hover:text-white outline-none nav-toggler"
+        data-target="#navigation"
+      >
+        <i class="material-icons">menu</i>
+      </button>
+      <div
+        class="hidden top-navbar w-full lg:inline-flex lg:flex-grow lg:w-auto"
+        id="navigation"
+      >
+        <div
+          class="lg:inline-flex lg:flex-row lg:ml-auto lg:w-auto w-full lg:items-center items-start  flex flex-col lg:h-auto hidden lg:block"
+        >
+          <a
+            href="#"
+            class="lg:inline-flex lg:w-auto w-full px-3 py-2 rounded text-gray-400 items-center justify-center hover:bg-gray-900 hover:text-white"
+          >
+            <span><i class="fa fa-question-circle" aria-hidden="true"></i></span>
+          </a>
+          <div class="group inline-block">
+  <button
+    class="lg:inline-flex px-3 py-2 rounded text-gray-400 items-center justify-center hover:bg-gray-900 hover:text-white min-w-32"
+  >
+    <span><i class="fa fa-user" aria-hidden="true"></i></span>
+  </button>
+  <ul
+    class="bg-white border rounded-sm transform scale-0 group-hover:scale-100 absolute 
+  transition duration-150 ease-in-out origin-top min-w-32"
+  >
+    <li> <%= link_to "Sign Out", destroy_user_session_path, class:"rounded-sm px-3 py-1 hover:bg-gray-100" %> </li>
+
+         
+  </ul>
+</div>
+
+        </div>
+         <div
+          class="lg:inline-flex lg:flex-row lg:ml-auto lg:w-auto w-full lg:items-center items-start  flex flex-col lg:h-auto lg:hidden"
+        >
+          <a
+            href="#"
+            class="lg:inline-flex lg:w-auto w-full px-3 py-2 rounded text-gray-400 items-center justify-center hover:bg-gray-900 hover:text-white "
+          >
+            <span>Account</span>
+          </a>
+          <a
+            href="#"
+            class="lg:inline-flex lg:w-auto w-full px-3 py-2 rounded text-gray-400 items-center justify-center hover:bg-gray-900 hover:text-white"
+          >
+            <span>Help</span>
+          </a>
+
+           <%= link_to "Dashboard", admin_index_path, class:"lg:inline-flex lg:w-auto w-full px-3 py-2 rounded text-gray-400 items-center justify-center hover:bg-gray-900 hover:text-white" %>
+
+          <%= link_to "Orders", admin_order_path, class:"lg:inline-flex lg:w-auto w-full px-3 py-2 rounded text-gray-400 items-center justify-center hover:bg-gray-900 hover:text-white" %>
+
+          <%= link_to "Orders Archive", admin_orderarchive_path, class:"lg:inline-flex lg:w-auto w-full px-3 py-2 rounded text-gray-400 items-center justify-center hover:bg-gray-900 hover:text-white" %>
+
+          <%= link_to "Inventory Management", admin_products_path, class:"lg:inline-flex lg:w-auto w-full px-3 py-2 rounded text-gray-400 items-center justify-center hover:bg-gray-900 hover:text-white" %>
+        </div>
+      </div>
+    </nav>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.0/jquery.min.js" integrity="sha256-xNzN2a4ltkB44Mc/Jz3pT4iU1cmeR0FkXs4pru/JxaQ=" crossorigin="anonymous"></script>
+<script>
+  $(document).ready(function() {
+  $(".nav-toggler").each(function(_, navToggler) {
+    var target = $(navToggler).data("target");
+    $(navToggler).on("click", function() {
+      $(target).animate({
+        height: "toggle"
+      });
+    });
+  });
+});
+</script>
+
+<body>
+  <div x-data="{sidebar : true}" class="flex ">
+
+    <!-- Left Sidebar -->
+    <div class="h-screen border-r lg:fixed lg:w-56 bg-white left-0 top-0 hidden lg:block" :class="{ 'md:block hidden' : sidebar == false }">
+      <div
+        class="items-center px-4 py-4 font-bold leading-10 tracking-wider text-center text-indigo-600 uppercase lg:flex h-18 text-md">
+        <span class="hidden ml-2 lg:inline-block"> Admin</span>
+      </div>
+      <hr class="mx-4 divider">
+      <div class="mx-2 lg:mx-4">
+        <hr class="divider">
+         <div class="items-center block py-4 tracking-wide text-center text-indigo-600 lg:flex lg:text-sm hover:text-indigo-600">
+          <i class="block fa fa-tachometer-alt p-2"></i>
+          <%= link_to "Dashboard", admin_index_path, class:"items-center block py-4 tracking-wide text-center text-gray-400 lg:flex lg:text-sm hover:text-indigo-600" %>
+        </div>
+
+        <hr class="divider">
+         <div class="items-center block py-4 tracking-wide text-center text-gray-400 lg:flex lg:text-sm hover:text-indigo-600 ">
+          <i class="fa fa-list-ul p-2"></i>
+          <%= link_to "Orders", admin_order_path, class:"items-center block py-1 tracking-wide text-center text-gray-400 lg:flex lg:text-sm hover:text-indigo-600" %>
+        </div>
+
+        <hr class="divider">
+         <div class="items-center block py-4 tracking-wide text-center text-gray-400 lg:flex lg:text-sm hover:text-indigo-600">
+          <i class="fa fa-archive p-2"></i>
+          <%= link_to "Orders Archive", admin_orderarchive_path, class:"items-center block py-1 tracking-wide text-center text-gray-400 lg:flex lg:text-sm hover:text-indigo-600" %>
+        </div>
+
+         <div class="items-center block py-4 tracking-wide text-center text-gray-400 lg:flex lg:text-sm hover:text-indigo-600">
+          <i class="fa fa-folder p-2"></i>
+          <%= link_to "Inventory Management", admin_products_path, class:"items-center block py-4 tracking-wide text-center text-gray-400 lg:flex lg:text-sm hover:text-indigo-600" %>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- Main content area -->
+    <div class="flex-1 bg-gray-100 lg:ml-24 lg:ml-56">
+
+      <!-- Topbar -->
+
+      <!-- Page Heading -->
+      <div class="h-24">
+      </div>
+      <div class="flex-1 px-6 mb-4">
+        <h1 class="mb-2 text-3xl text-gray-700"> Admin | Help </h1>
+
+
+        <body class="font-sans container">
+      <div class="w-full md:w-3/5 mx-auto p-4">
+         <div class="shadow-md">
+            <div class="tab w-full overflow-hidden border-t">
+               <input class="absolute opacity-0 " id="tab-multi-one" type="checkbox" name="tabs">
+               <label class="block p-5 leading-normal cursor-pointer" for="tab-multi-one">Label One</label>
+               <div class="tab-content overflow-hidden border-l-2 bg-gray-100 border-indigo-500 leading-normal">
+                  <p class="p-5">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Tenetur, architecto, explicabo perferendis nostrum, maxime impedit atque odit sunt pariatur illo obcaecati soluta molestias iure facere dolorum adipisci eum? Saepe, itaque.</p>
+               </div>
+            </div>
+            <div class="tab w-full overflow-hidden border-t">
+               <input class="absolute opacity-0" id="tab-multi-two" type="checkbox" name="tabs">
+               <label class="block p-5 leading-normal cursor-pointer" for="tab-multi-two">Label Two</label>
+               <div class="tab-content overflow-hidden border-l-2 bg-gray-100 border-indigo-500 leading-normal">
+                  <p class="p-5">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Tenetur, architecto, explicabo perferendis nostrum, maxime impedit atque odit sunt pariatur illo obcaecati soluta molestias iure facere dolorum adipisci eum? Saepe, itaque.</p>
+               </div>
+            </div>
+            <div class="tab w-full overflow-hidden border-t">
+               <input class="absolute opacity-0" id="tab-multi-three" type="checkbox" name="tabs">
+               <label class="block p-5 leading-normal cursor-pointer" for="tab-multi-three">Label Three</label>
+               <div class="tab-content overflow-hidden border-l-2 bg-gray-100 border-indigo-500 leading-normal">
+                  <p class="p-5">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Tenetur, architecto, explicabo perferendis nostrum, maxime impedit atque odit sunt pariatur illo obcaecati soluta molestias iure facere dolorum adipisci eum? Saepe, itaque.</p>
+               </div>
+            </div>
+         </div>
+      </div>
+   </body>
+
+        <!-- Content Row -->
+        <div class="grid grid-cols-1 mb-2 -mx-3 md:grid-cols-2 lg:grid-cols-2 xl:grid-cols-4">
+        
+          
+          <!-- Earnings (Monthly) Card Example  
+          <div class="w-full p-3">
+            <div class="p-3 bg-white border-l-4 border-indigo-600 rounded-md shadow">
+              <div class="flex items-center justify-between p-2">
+                <div class="w-full pr-2">
+                  <div class="mb-1 text-xs font-semibold leading-5 text-indigo-600 uppercase">New Leads</div>
+                  <div class="text-xl font-bold text-gray-700">34,00</div>
+                </div>
+                <div>
+                  <svg fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                    viewBox="0 0 24 24" class="w-8 h-8 text-gray-400">
+                    <path
+                      d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z">
+                    </path>
+                  </svg>
+                </div>
+              </div>
+            </div>
+          </div>
+          <!-- Earnings (Monthly) Card Example 
+          <div class="w-full p-3">
+            <div class="p-3 bg-white border-l-4 border-orange-600 rounded-md shadow">
+              <div class="flex items-center justify-between p-2">
+                <div class="w-full pr-2">
+                  <div class="mb-1 text-xs font-semibold leading-5 text-orange-600 uppercase">Deals</div>
+                  <div class="text-xl font-bold text-gray-700">68%</div>
+                </div>
+                <div>
+                  <svg fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                    viewBox="0 0 24 24" class="w-8 h-8 text-gray-400">
+                    <path
+                      d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-3 7h3m-3 4h3m-6-4h.01M9 16h.01">
+                    </path>
+                  </svg>
+                </div>
+              </div>
+            </div>
+          </div>
+          <!-- Earnings (Monthly) Card Example 
+          <div class="w-full p-3">
+            <div class="p-3 bg-white border-l-4 border-gray-600 rounded-md shadow">
+              <div class="flex items-center justify-between p-2">
+                <div class="w-full pr-2">
+                  <div class="mb-1 text-xs font-semibold leading-5 text-gray-600 uppercase">Downloads</div>
+                  <div class="text-xl font-bold text-gray-700">810</div>
+                </div>
+                <div>
+                  <svg fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                    viewBox="0 0 24 24" class="w-8 h-8 text-gray-400">
+                    <path
+                      d="M8 10h.01M12 10h.01M16 10h.01M9 16H5a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v8a2 2 0 01-2 2h-5l-5 5v-5z">
+                    </path>
+                  </svg>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div> -->
+
+        <!-- Charts Row  
+        <div class="flex flex-wrap mb-2 -mx-3">
+          <div class="w-full p-3 md:w-1/2">
+            <div class="bg-white rounded-md shadow">
+              <div class="px-5 py-4 font-bold bg-gray-100 border-b text-theme-color text-md rounded-t-md">
+                Earnings Overview
+              </div>
+              <div class="p-5 leading-7 text-gray-800 text-md">
+                <canvas id="conversionsChart" class="chart-canvas"></canvas>
+              </div>
+            </div>
+          </div>
+          <div class="w-full p-3 md:w-1/2">
+            <div class="bg-white rounded-md shadow">
+              <div class="px-5 py-4 font-bold bg-gray-100 border-b text-theme-color text-md rounded-t-md">
+                Insight Overview
+              </div>
+              <div class="p-5 leading-7 text-gray-800 text-md">
+                <canvas id="chartjs-7" class="chartjs" width="undefined" height="undefined"></canvas>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!-- Recent Activity 
+        <div class="flex flex-wrap mb-2 -mx-3">
+          <div class="w-full p-3 md:w-2/4 xl:w-2/5">
+            <div class="bg-white rounded-md shadow">
+              <div class="px-5 py-4 font-bold bg-gray-100 border-b text-theme-color text-md rounded-t-md">
+                Recent Activity
+              </div>
+              <div class="p-5 leading-7 text-gray-800 text-md">
+                <div class="flex items-center py-1 mb-1 rounded-md cursor-pointer hover:bg-gray-100">
+                  <div class="flex items-center px-2">
+                    <img class="w-10 h-10 rounded-full"
+                      src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?ixlib=rb-1.2.1&q=80&fm=jpg&crop=entropy&cs=tinysrgb&w=60&h=60&fit=facearea&ixid=eyJhcHBfaWQiOjF9&facepad=2"
+                      alt="User">
+                  </div>
+                  <div class="px-2">
+                    <div class="text-sm font-semibold leading-7 text-gray-700">Mario Speedwagon </div>
+                    <p class="text-sm leading-5 text-gray-600">
+                      Lorem ipsum, dolor sit amet consectetur adipisicing elit.
+                    </p>
+                    <span class="block text-xs text-gray-500">4m ago</span>
+                  </div>
+                </div>
+                <div class="flex items-center py-1 mb-1 rounded-md cursor-pointer hover:bg-gray-100">
+                  <div class="flex items-center px-2">
+                    <img class="w-10 h-10 rounded-full"
+                      src="https://images.unsplash.com/photo-1568967729548-e3dbad3d37e0?ixlib=rb-1.2.1&q=80&fm=jpg&crop=entropy&cs=tinysrgb&w=60&h=60&ixid=eyJhcHBfaWQiOjF9&fit=facearea&facepad=2"
+                      alt="User">
+                  </div>
+                  <div class="px-2">
+                    <div class="text-sm font-semibold leading-7 text-gray-700">Anna Sthesia </div>
+                    <p class="text-sm leading-4 text-gray-600">
+                      Lorem ipsum, dolor sit amet consectetur adipisicing elit.
+                    </p>
+                    <span class="block text-xs text-gray-500">1h ago</span>
+                  </div>
+                </div>
+                <div class="flex items-center py-1 mb-1 rounded-md cursor-pointer hover:bg-gray-100">
+                  <div class="flex items-center px-2">
+                    <img class="w-10 h-10 rounded-full"
+                      src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&q=80&fm=jpg&crop=entropy&cs=tinysrgb&w=60&h=60&ixid=eyJhcHBfaWQiOjF9&fit=facearea&facepad=2"
+                      alt="User">
+                  </div>
+                  <div class="px-2">
+                    <div class="text-sm font-semibold leading-7 text-gray-700">Gail Forcewind </div>
+                    <p class="text-sm leading-4 text-gray-600">
+                      Lorem ipsum, dolor sit amet consectetur adipisicing elit.
+                    </p>
+                    <span class="block text-xs text-gray-500">3h ago</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="w-full p-3 md:w-2/4 xl:w-3/5">
+            <div class="bg-white rounded-md shadow">
+              <div class="px-5 py-4 font-bold bg-gray-100 border-b text-theme-color text-md rounded-t-md">
+                Checklist
+              </div>
+              <div class="px-5 pt-3 leading-7 text-gray-800 text-md">
+                <div class="px-3 py-1 mt-1 leading-8 text-gray-600 border rounded-md hover:bg-red-100">
+                  <input type="checkbox" name="" id="task-1" class="mr-2 border-blue-300 form-checkbox">
+                  <label for="task-1">
+                    On-Bboard new user from xyz company
+                  </label>
+                </div>
+                <div
+                  class="px-3 py-1 mt-1 leading-8 text-gray-600 border-b border-gray-100 rounded-md hover:bg-gray-100">
+                  <input type="checkbox" name="" id="task-2" class="mr-2 border-blue-300 form-checkbox">
+                  <label for="task-2">
+                    Refactor the core social sharing modules
+                  </label>
+                </div>
+                <div
+                  class="px-3 py-1 mt-1 leading-8 text-gray-600 border-b border-gray-100 rounded-md hover:bg-gray-100">
+                  <input type="checkbox" name="" id="task-3" class="mr-2 border-blue-300 form-checkbox">
+                  <label for="task-3">
+                    Hire new operations and facility manager
+                  </label>
+                </div>
+                <div
+                  class="px-3 py-1 mt-1 font-semibold leading-8 text-green-600 line-through bg-green-100 border-b border-gray-100 rounded-md">
+                  <input type="checkbox" name="" id="task-4" checked class="mr-2 border-blue-300 form-checkbox">
+                  <label for="task-4">
+                    Lorem ipsum, dolor sit amet consectetur adipisicing elit. Dolor,
+                  </label>
+                </div>
+                <div class="px-3 py-1 mt-1 leading-8 text-gray-600 border-b border-gray-100 hover:bg-gray-100">
+                  <input type="checkbox" name="" id="task-5" class="mr-2 border-blue-300 form-checkbox">
+                  <label for="task-5">
+                    Assumenda incidunt magni explicabo debitis qui consequuntur sint
+                  </label>
+                </div>
+                <div class="px-4 py-2 mt-1 text-right border-t">
+                  <button class="px-2 py-1 text-sm text-gray-100 rounded bg-theme-color hover:bg-theme-hover-color">Add
+                    Task</button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Card Row 
+        <div class="flex flex-wrap mb-2 -mx-3">
+          <div class="w-full p-3 md:w-1/2">
+            <div class="bg-white rounded-md shadow">
+              <div class="px-5 py-4 font-bold bg-gray-100 border-b text-theme-color text-md rounded-t-md">
+                Default Card
+              </div>
+              <div class="p-5 leading-7 text-gray-800 text-md">
+                Lorem ipsum, dolor sit amet consectetur adipisicing elit. Dolor, aliquam sit deleniti quis assumenda
+                incidunt magni explicabo debitis qui consequuntur sint quisquam autem accusamus optio, esse, quaerat
+                sapiente illum quibusdam?
+              </div>
+            </div>
+          </div>
+          <div class="w-full p-3 md:w-1/2">
+            <div class="bg-white rounded-md shadow">
+              <div class="px-5 py-4 font-bold bg-gray-100 border-b text-theme-color text-md rounded-t-md">
+                Default Card
+              </div>
+              <div class="p-5 leading-7 text-gray-800 text-md">
+                Lorem ipsum, dolor sit amet consectetur adipisicing elit. Dolor, aliquam sit deleniti quis assumenda
+                incidunt magni explicabo debitis qui consequuntur sint quisquam autem accusamus optio, esse, quaerat
+                sapiente illum quibusdam?
+              </div>
+            </div>
+          </div>
+        </div>
+      </div> 
+      Footer 
+      <div class="p-6 bg-white">
+        <div class="flex">
+          <div class="text-sm tracking-wide text-gray-600">
+            Copyright &copy; Your Website 2020
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</body>
+<script src="https://cdn.jsdelivr.net/gh/alpinejs/alpine@v2.x.x/dist/alpine.min.js" defer></script>
+<script src="public/js/theme.js"></script> -->
+
+</html>

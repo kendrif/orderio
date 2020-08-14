@@ -15,7 +15,8 @@ class SubscriptionsController < ApplicationController
     account_suid = @account.uid
     @order = Order.find(params[:order])
     charge = @order.amount * 100
-    fee = @order.amount * 1
+    fee = @order.amount * 1.5
+    
   
     token = params[:stripeToken]
     customer = Stripe::Customer.create(email: @order.email, source: token)
