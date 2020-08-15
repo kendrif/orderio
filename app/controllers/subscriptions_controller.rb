@@ -55,8 +55,18 @@ class SubscriptionsController < ApplicationController
       flash[:error] = e.message
       redirect_to new_subscription_path(:account_id => @account, :amount => @order.amount, :order => @order), notice: "There has been an issue. Errorcode: 222"
 
-    rescue Exception
+    rescue ActiveRecord::RecordNotFound
+      # handle not found error
       redirect_to new_subscription_path(:account_id => @account, :amount => @order.amount, :order => @order), notice: "There has been an issue. Errorcode: 333"
+    rescue ActiveRecord::ActiveRecordError
+      # handle other ActiveRecord errors
+      redirect_to new_subscription_path(:account_id => @account, :amount => @order.amount, :order => @order), notice: "There has been an issue. Errorcode: 444"
+    rescue # StandardError
+    # handle most other errors
+    # handle everything else
+    redirect_to new_subscription_path(:account_id => @account, :amount => @order.amount, :order => @order), notice: "There has been an issue. Errorcode: 555"
+    rescue Exception
+      redirect_to new_subscription_path(:account_id => @account, :amount => @order.amount, :order => @order), notice: "There has been an issue. Errorcode: 666"
 
     end
 
