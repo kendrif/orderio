@@ -8,7 +8,9 @@ class SubscriptionsController < ApplicationController
   # Reference:
   # https://stripe.com/docs/connect/subscriptions
   def create
-    
+
+    begin
+
     @account = User.find_by_id(params[:account_id])
     key = @account.access_code
     Stripe.api_key = key
@@ -45,13 +47,19 @@ class SubscriptionsController < ApplicationController
     OrderMailer.recived(@order).deliver_now
     redirect_to session.delete(:return_to), notice: "Your order has been successful 👌🏼"
 
-  rescue Stripe::CardError => e
-    flash[:error] = e.message
-    format.html { redirect_to new_subscription_path(:account_id => @account, :amount => @order.amount, :order => @order), notice: "There has been an error with your payment. Please try again." }
+    rescue Stripe::CardError => e
+      flash[:error] = e.message
+      format.html { redirect_to new_subscription_path(:account_id => @account, :amount => @order.amount, :order => @order), notice: "There has been an error with your payment. Please try again. Errorcode: 1" }
   
-  rescue => e
-    flash[:error] = e.message
-    redirect_to new_subscription_path(:account_id => @account, :amount => @order.amount, :order => @order), notice: "There has been an issue."
+    rescue => e
+      flash[:error] = e.message
+      redirect_to new_subscription_path(:account_id => @account, :amount => @order.amount, :order => @order), notice: "There has been an issue. Errorcode: 222"
+
+    rescue Exception
+      redirect_to new_subscription_path(:account_id => @account, :amount => @order.amount, :order => @order), notice: "There has been an issue. Errorcode: 333"
+
+    end
+
   end
 
 end
