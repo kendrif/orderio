@@ -9,8 +9,6 @@ class SubscriptionsController < ApplicationController
   # https://stripe.com/docs/connect/subscriptions
   def create
 
-    begin
-
     @account = User.find_by_id(params[:account_id])
     key = @account.access_code
     Stripe.api_key = key
@@ -22,6 +20,8 @@ class SubscriptionsController < ApplicationController
     token = params[:stripeToken]
     customer = Stripe::Customer.create(email: @order.email, source: token)
  
+    begin
+
      Stripe::PaymentIntent.create({
        customer: customer,
        amount: (charge).to_i, 
@@ -53,20 +53,18 @@ class SubscriptionsController < ApplicationController
   
     rescue => e
       flash[:error] = e.message
-      redirect_to new_subscription_path(:account_id => @account, :amount => @order.amount, :order => @order), notice: "There has been an issue. Errorcode: 222"
+      format.html { redirect_to new_subscription_path(:account_id => @account, :amount => @order.amount, :order => @order), notice: "There has been an issue. Errorcode: 222" }
 
     rescue ActiveRecord::RecordNotFound
       # handle not found error
-      redirect_to new_subscription_path(:account_id => @account, :amount => @order.amount, :order => @order), notice: "There has been an issue. Errorcode: 333"
+      format.html { redirect_to new_subscription_path(:account_id => @account, :amount => @order.amount, :order => @order), notice: "There has been an issue. Errorcode: 333" }
     rescue ActiveRecord::ActiveRecordError
       # handle other ActiveRecord errors
-      redirect_to new_subscription_path(:account_id => @account, :amount => @order.amount, :order => @order), notice: "There has been an issue. Errorcode: 444"
+      format.html { redirect_to new_subscription_path(:account_id => @account, :amount => @order.amount, :order => @order), notice: "There has been an issue. Errorcode: 444" }
     rescue # StandardError
-    # handle most other errors
-    # handle everything else
-    redirect_to new_subscription_path(:account_id => @account, :amount => @order.amount, :order => @order), notice: "There has been an issue. Errorcode: 555"
+    format.html { redirect_to new_subscription_path(:account_id => @account, :amount => @order.amount, :order => @order), notice: "There has been an issue. Errorcode: 555" }
     rescue Exception
-      redirect_to new_subscription_path(:account_id => @account, :amount => @order.amount, :order => @order), notice: "There has been an issue. Errorcode: 666"
+      format.html { redirect_to new_subscription_path(:account_id => @account, :amount => @order.amount, :order => @order), notice: "There has been an issue. Errorcode: 666" }
 
     end
 
