@@ -3,6 +3,7 @@ class SubscriptionsController < ApplicationController
   def new
     @account = User.find_by_id(params[:account_id])
     @order = Order.find(params[:order])
+
   end
 
   # Reference:
@@ -20,6 +21,8 @@ class SubscriptionsController < ApplicationController
     token = params[:stripeToken]
     customer = Stripe::Customer.create(email: @order.email, source: token)
 
+    begin
+
      Stripe::PaymentIntent.create({
        customer: customer,
        amount: (charge).to_i, 
@@ -30,6 +33,7 @@ class SubscriptionsController < ApplicationController
      }, {
        stripe_account: account_suid
      })
+
       options = {
       stripe_id: customer.id
       }
@@ -44,6 +48,14 @@ class SubscriptionsController < ApplicationController
       OrderFiniJob.perform_now(@order)
       OrderMailer.recived(@order).deliver_now
       redirect_to session.delete(:return_to), notice: "Your order has been successful 👌🏼"
+
+    rescue # StandardError
+      render :json => "record not found 1"
+    rescue Exception
+      render :json => "record not found 2"
+      
+      raise
+    end
 
   end
 
