@@ -1,4 +1,5 @@
 class SubscriptionsController < ApplicationController
+  
 
   def new
     @account = User.find_by_id(params[:account_id])
@@ -53,8 +54,9 @@ class SubscriptionsController < ApplicationController
       render :json => "record not found 1"
     rescue Exception
       render :json => "record not found 2"
-      
+
       raise
+
     end
 
   end
