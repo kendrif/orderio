@@ -40,7 +40,6 @@ Rails.application.routes.draw do
   get '/start', to: 'admin#landingpage'
   get '/sales', to: 'admin#sales'
   get '/help', to: 'admin#help'
-  get '/subscription', to: 'admin#help'
 
   get "menu/:id" => "store#menu", as: :menu
 
