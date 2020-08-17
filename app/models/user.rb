@@ -8,14 +8,9 @@ class User < ApplicationRecord
   has_many :categories
 
   validates :email, uniqueness:true 
-  validates :subdomain, uniqueness:true 
   validates :s_name, presence:true
   validates :username, uniqueness:true 
-  before_save :downcase_fields
 
-  def downcase_fields
-    self.subdomain.downcase!
-  end
 
   def can_receive_payments?
     uid? &&  provider? && access_code? && publishable_key?

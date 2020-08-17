@@ -1,0 +1,9 @@
+<p id="notice"><%= notice %></p>
+
+<%= render 'form', communication: @communication %>
+
+  <% if request.fullpath.include?('sales') %>
+  <%= link_to 'Back', root_path %>
+  <% else %>
+  <%= link_to 'Back', help_path %>
+  <% end %>

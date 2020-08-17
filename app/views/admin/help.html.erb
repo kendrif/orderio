@@ -101,6 +101,7 @@ body {
 </style>
 
 <nav class="flex items-center bg-white w-full p-3 flex-wrap border-b-2 right-0 absolute">
+ <%= link_to "< Back to Admin", admin_index_path, class:"text-xl md:text-2xl  text-indigo-600 hover:text-red-500" %>
       <button
         class="text-indigo-600 inline-flex p-3 hover:bg-indigo-600 rounded lg:hidden ml-auto hover:text-white outline-none nav-toggler"
         data-target="#navigation"
@@ -249,7 +250,7 @@ body {
             <div class="card px-4 py-2">
 
                 <div class="card-text">
-                    <h1 class="text-xl md:text-2xl font-bold leading-tight text-gray-900">Contact Support</h1>
+                    <%= link_to "Contact Support", support_path, class:"text-xl md:text-2xl font-bold leading-tight text-gray-900 hover:text-red-500" %>
                     <p class=" md:text-lg text-gray-700 mt-3 ">24×7 help from our support staff</p>
                 </div>
             </div>

@@ -85,3 +85,5 @@ document.addEventListener("turbolinks:load", () => {
     charge.initialize()
   }
 })
+
+

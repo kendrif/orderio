@@ -2,6 +2,7 @@ require 'sidekiq/web'
 
 Rails.application.routes.draw do
 
+  resources :communications
   resources :orders do
     member do 
       patch :complete 
@@ -38,7 +39,8 @@ Rails.application.routes.draw do
   get 'admin/landingpage'
 
   get '/start', to: 'admin#landingpage'
-  get '/sales', to: 'admin#sales'
+  get '/sales', to: 'communications#new'
+  get '/support', to: 'communications#new'
   get '/help', to: 'admin#help'
 
   get "menu/:id" => "store#menu", as: :menu

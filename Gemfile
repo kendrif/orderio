@@ -60,6 +60,7 @@ gem 'stripe', '~> 5.22'
 gem 'omniauth', '~> 1.9'
 gem 'omniauth-stripe-connect', '~> 2.10', '>= 2.10.1'
 gem 'omniauth-oauth2', '~> 1.6'
+gem 'mail_form', '~> 1.5', '>= 1.5.1'
 
 gem 'capistrano', '~> 3.11'
 gem 'capistrano-rails', '~> 1.4'
