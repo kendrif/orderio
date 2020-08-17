@@ -39,6 +39,7 @@ Rails.application.routes.draw do
   get 'admin/landingpage'
 
   get '/start', to: 'admin#landingpage'
+  get '/deals', to: 'admin#deals'
   get '/sales', to: 'communications#new'
   get '/support', to: 'communications#new'
   get '/help', to: 'admin#help'
