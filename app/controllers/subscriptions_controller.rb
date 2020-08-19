@@ -55,7 +55,7 @@ class SubscriptionsController < ApplicationController
     rescue Exception
       render :json => "record not found 2"
 
-      raise
+    raise
 
     end
 
